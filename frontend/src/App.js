@@ -1,68 +1,30 @@
-import React, { useState } from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { chatAPI } from './services/api';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import LandingPage from './components/LandingPage';
-import ChatWindow from './components/ChatWindow';
-
-const ChatInterface = () => {
-  const { sessionId } = useParams();
-  const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const startNewChat = async (initialMessage = null) => {
-    try {
-      const response = await chatAPI.startNewChat();
-      const newSessionId = response.data.sessionId;
-      navigate(`/chat/${newSessionId}`);
-    } catch (error) {
-      console.error('Failed to start new chat:', error);
-    }
-  };
-
-  return (
-    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
-      <Sidebar
-        isOpen={sidebarOpen}
-        onToggle={() => setSidebarOpen(!sidebarOpen)}
-        currentSessionId={sessionId}
-        onSessionSelect={(id) => {
-          navigate(`/chat/${id}`);
-          setSidebarOpen(false);
-        }}
-        onNewChat={() => {
-          startNewChat();
-          setSidebarOpen(false);
-        }}
-      />
-      
-      <div className="flex-1 flex flex-col">
-        <Header onSidebarToggle={() => setSidebarOpen(!sidebarOpen)} />
-        
-        {!sessionId ? (
-          <LandingPage onStartChat={startNewChat} />
-        ) : (
-          <ChatWindow />
-        )}
-      </div>
-    </div>
-  );
-};
+import React from 'react';
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
-          <Routes>
-            <Route path="/" element={<ChatInterface />} />
-            <Route path="/chat/:sessionId" element={<ChatInterface />} />
-          </Routes>
-        </div>
-      </Router>
-    </ThemeProvider>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <h1>ChatGPT Clone</h1>
+      <p>Welcome to the ChatGPT Clone application!</p>
+      <div style={{ 
+        border: '1px solid #ccc', 
+        padding: '20px', 
+        marginTop: '20px',
+        borderRadius: '8px'
+      }}>
+        <h2>Chat Interface</h2>
+        <p>This is a simple test to verify the React app is working.</p>
+        <button style={{
+          padding: '10px 20px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}>
+          Start New Chat
+        </button>
+      </div>
+    </div>
   );
 };
 
