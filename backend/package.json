@@ -8,14 +8,24 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+<<<<<<< HEAD
     "cors": "^2.8.5",
     "express": "^4.21.2",
+=======
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+>>>>>>> 7161d162a45457badbe1c20dc5f86347a589f0a6
     "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+<<<<<<< HEAD
   },
   "keywords": [],
   "author": "",
   "license": "ISC"
 }
+=======
+  }
+}
+>>>>>>> 7161d162a45457badbe1c20dc5f86347a589f0a6
